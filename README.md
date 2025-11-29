@@ -1,5 +1,7 @@
 # VelocityDiscordLogger-Backend
 
+[🇰🇷 한국어 (Korean)](README_KR.md)
+
 A lightweight backend plugin for Spigot/Paper/Purpur servers that works in conjunction with [VelocityDiscordLogger](https://github.com/minseok7891/VelocityDiscordLogger).
 
 ## Purpose
