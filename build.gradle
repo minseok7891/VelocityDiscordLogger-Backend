@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'me.minseok'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "spigotmc-repo"
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+}
+
+dependencies {
+    compileOnly "org.spigotmc:spigot-api:1.21-R0.1-SNAPSHOT"
+}
+
+targetCompatibility = JavaVersion.VERSION_21
+sourceCompatibility = JavaVersion.VERSION_21
+
+shadowJar {
+    archiveBaseName.set('VelocityDiscordLogger-Backend')
+    archiveClassifier.set('')
+    archiveVersion.set('')
+}

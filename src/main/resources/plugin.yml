@@ -1,0 +1,6 @@
+name: VelocityDiscordLogger-Backend
+version: 1.0.0
+main: me.minseok.velocitydiscordloggerbackend.VelocityDiscordLoggerBackend
+api-version: 1.21
+authors: [minseok]
+description: Backend plugin for VelocityDiscordLogger
