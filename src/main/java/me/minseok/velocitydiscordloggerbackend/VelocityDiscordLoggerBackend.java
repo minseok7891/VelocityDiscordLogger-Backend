@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import com.google.gson.JsonObject;
 
 public class VelocityDiscordLoggerBackend extends JavaPlugin implements Listener {
 
@@ -17,7 +18,9 @@ public class VelocityDiscordLoggerBackend extends JavaPlugin implements Listener
     @Override
     public void onEnable() {
         getServer().getMessenger().registerOutgoingPluginChannel(this, CHANNEL);
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         getServer().getPluginManager().registerEvents(this, this);
+        getCommand("server").setExecutor(new ServerCommand(this));
         getLogger().info("VelocityDiscordLogger-Backend enabled!");
     }
 
@@ -29,20 +32,27 @@ public class VelocityDiscordLoggerBackend extends JavaPlugin implements Listener
     @EventHandler
     public void onAchievement(PlayerAdvancementDoneEvent event) {
         Advancement advancement = event.getAdvancement();
-        // Filter out recipes and root advancements
         if (advancement.getKey().getKey().startsWith("recipes/"))
             return;
         if (event.getPlayer().getAdvancementProgress(advancement).getRemainingCriteria().size() > 0)
-            return; // Not fully completed
+            return;
 
-        // Simple check for displayable advancements
         if (advancement.getDisplay() == null)
             return;
 
         String title = advancement.getDisplay().getTitle();
         String description = advancement.getDisplay().getDescription();
+        String key = advancement.getKey().toString();
 
-        sendPluginMessage(event.getPlayer(), "achievement", title, description);
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "achievement");
+        json.addProperty("username", event.getPlayer().getName());
+        json.addProperty("uuid", event.getPlayer().getUniqueId().toString());
+        json.addProperty("title", title);
+        json.addProperty("description", description);
+        json.addProperty("key", key);
+
+        sendPluginMessage(event.getPlayer(), json.toString());
     }
 
     @EventHandler
@@ -51,19 +61,18 @@ public class VelocityDiscordLoggerBackend extends JavaPlugin implements Listener
         if (deathMessage == null || deathMessage.isEmpty())
             return;
 
-        sendPluginMessage(event.getEntity(), "death", deathMessage);
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "death");
+        json.addProperty("username", event.getEntity().getName());
+        json.addProperty("uuid", event.getEntity().getUniqueId().toString());
+        json.addProperty("message", deathMessage);
+
+        sendPluginMessage(event.getEntity(), json.toString());
     }
 
-    private void sendPluginMessage(Player player, String subChannel, String... args) {
+    private void sendPluginMessage(Player player, String message) {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
-        out.writeUTF(subChannel);
-        out.writeUTF(player.getName());
-        out.writeUTF(player.getUniqueId().toString());
-
-        for (String arg : args) {
-            out.writeUTF(arg);
-        }
-
+        out.writeUTF(message);
         player.sendPluginMessage(this, CHANNEL, out.toByteArray());
     }
 }

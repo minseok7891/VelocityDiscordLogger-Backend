@@ -1,12 +1,3 @@
-# VelocityDiscordLogger-Backend
-
-<div align="center">
-
-![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk)
-![Spigot](https://img.shields.io/badge/Spigot-1.21-yellow?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-
-**[🇺🇸 English (영어)](README_EN.md)**
 
 </div>
 
