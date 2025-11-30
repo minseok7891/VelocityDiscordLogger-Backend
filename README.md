@@ -1,3 +1,12 @@
+<div align="center">
+
+# Velocity Discord Logger - Backend
+
+![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Velocity](https://img.shields.io/badge/Platform-Velocity-0066CC?style=for-the-badge&logo=velocity&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
+[한국어](README.md) | [English](README_EN.md)
 
 </div>
 
