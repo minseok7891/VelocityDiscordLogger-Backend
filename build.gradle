@@ -26,7 +26,7 @@ targetCompatibility = JavaVersion.VERSION_21
 sourceCompatibility = JavaVersion.VERSION_21
 
 shadowJar {
-    archiveBaseName.set('VelocityDiscordLogger-Backend')
+    archiveBaseName.set('Discord-Logger-Backend')
     archiveClassifier.set('')
     archiveVersion.set('')
 }

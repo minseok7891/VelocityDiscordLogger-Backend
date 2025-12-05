@@ -13,7 +13,7 @@ import com.google.gson.JsonObject;
 
 public class VelocityDiscordLoggerBackend extends JavaPlugin implements Listener {
 
-    private static final String CHANNEL = "velocitydiscordlogger:channel";
+    private static final String CHANNEL = "velocitydiscordlogger:main";
 
     @Override
     public void onEnable() {
